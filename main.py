@@ -27,7 +27,7 @@ BULLET_VEL = 7
 MAX_BULLETS = 3
 SPACESHIP_WIDTH, SPACESHIP_HEIGHT = 55, 40
 
- = pygame.USEREVENT + 1
+YELLOW_HIT = pygame.USEREVENT + 1
 RED_HIT = pygame.USEREVENT + 2
 
 YELLOW_SPACESHIP_IMAGE = pygame.image.load(
@@ -101,7 +101,7 @@ def handle_bullets(yellow_bullets, red_bullets, yellow, red):
     for bullet in red_bullets:
         bullet.x -= BULLET_VEL
         if yellow.colliderect(bullet):
-            pygame.event.post(pygame.event.Event())
+            pygame.event.post(pygame.event.Event(YELLOW_HIT))
             red_bullets.remove(bullet)
         elif bullet.x < 0:
             red_bullets.remove(bullet)
@@ -152,7 +152,7 @@ def main():
                 red_health -= 1
                 BULLET_HIT_SOUND.play()
 
-            if event.type == :
+            if event.type == YELLOW_HIT:
                 yellow_health -= 1
                 BULLET_HIT_SOUND.play()
 
